@@ -6,38 +6,40 @@ Portfolio of data analysis projects focused on real-world business problems usin
 
 ### 1. SwiftRoute Logistics — Delivery Performance Analysis
 
-End-to-end analysis of a last-mile logistics dataset covering orders, hubs, drivers, and vehicles. Built to support operational dashboards tracking on-time delivery, customer satisfaction, hub capacity, and fleet reliability.
+End-to-end analysis of a last-mile logistics dataset covering orders, hubs, drivers, and vehicles. Focused on identifying the highest-leverage operational fixes.
 
-**Business questions answered**
-- What is the overall on-time delivery rate and how does it trend month-over-month?
-- Which hubs are overloaded relative to capacity?
-- What are the primary drivers of delays?
-- How do driver experience and employment type relate to performance?
-- Does vehicle type or model meaningfully affect delivery reliability?
+**Core insight**
+Delays crush CSAT (4.50 on-time → 2.94 delayed). **40.8% of delays are internal and controllable**. That is the highest-ROI intervention zone.
 
 **Key findings**
-| Metric | Result |
-|--------|--------|
-| Total Orders | 27,979 (Jan 2023 – Dec 2024) |
-| On-Time Rate | 78.9% |
-| Average CSAT | 4.17 / 5 |
-| Average Delivery Time | 35.8 hours |
-| Highest Load Hub | Dallas Main (29.4 orders per capacity unit) |
-| Best Performing Hub | El Paso (80.6% on-time, 4.19 CSAT) |
+| Finding | Detail |
+|---------|--------|
+| On-Time Rate | 78.9% (stable, plateaued) |
+| CSAT Gap | On-time 4.50 vs Delayed 2.94 (–1.56 pts) |
+| Controllable Delays | 40.8% (vehicle breakdown, sorting, driver availability, hub processing) |
+| Hub Narrative Corrected | Dallas has highest volume but is **not** the worst for delays |
+| Vehicle Model > Type | Freightliner M2 has highest breakdowns (17.0 avg); type shows no difference |
+| Driver Ratings Misaligned | Juniors have best on-time rate but lowest ratings |
 
-Delay reasons are evenly distributed across vehicle breakdowns, road construction, sorting errors, driver availability, and hub processing — no single dominant cause.
+**Recommended priorities**
+1. Freightliner M2 reliability program
+2. Sorting process audit
+3. Driver scheduling / backup coverage
+4. Realign performance ratings to on-time outcomes
+5. Deprioritize Dallas capacity expansion as a delay fix
+
+Full write-up: [`swiftroute/analysis_summary.md`](swiftroute/analysis_summary.md)
 
 **Tools used**
 - DuckDB (SQL)
 - Python (data cleaning + loading)
-- Excel (result tables for dashboard handoff)
 
 **Files**
 - `swiftroute/SwiftRoute_SQL_Analysis.sql` — full SQL covering all dashboard KPIs
-- `swiftroute/analysis_summary.md` — written insights
+- `swiftroute/analysis_summary.md` — sharp insights + action plan
 - Dimension tables: `Drivers.csv`, `Hubs.csv`, `Vehicles.csv`
 
-> Orders.csv (~28k rows) is large and not committed. Contact for the full dataset or regenerate from the source.
+> Orders.csv (~28k rows) is large and not committed.
 
 ## How to run the analysis
 
